@@ -3,7 +3,6 @@ const config = require('./src/config')
 const logger = require('./src/middleware/logger')
 const xmlParse = require('./src/middleware/xmlParse')
 const router = require('./src/router')
-const wechat = require('./util/wechat')
 const app = new Koa()
 
 const path = require('path')
