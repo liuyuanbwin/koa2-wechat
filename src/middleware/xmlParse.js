@@ -17,6 +17,7 @@ module.exports = () => {
             })
 
             await promise.then((result) => {
+                    console.log(result)
                     ctx.req.body = result
                 })
                 .catch((e) => {
