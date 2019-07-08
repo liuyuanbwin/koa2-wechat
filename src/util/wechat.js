@@ -3,8 +3,19 @@ const WxApi = {
     accessToken: baseUrl+"cgi-bin/token?grant_type=client_credential"
 }
 var koa2Req = require('koa2-request')
-class WeChat{
-    constructor(opts){
+export class WeChat{
+    constructor(){
+        var opts = {
+            appId: config.appId,
+            appSecret: config.appSecret,
+            token: config.token,
+            getAccessToken: function() {
+              return fileHelper.readFileAsync(wechat_file, 'utf-8')
+            },
+            saveAccessToken:function(data) {
+              return fileHelper.writeFileAsync(wechat_file, data)
+            }
+          }
         this.appId = opts.appId
         this.appSecret = opts.appSecret
         this.getAccessToken = opts.getAccessToken

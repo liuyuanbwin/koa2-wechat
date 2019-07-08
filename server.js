@@ -9,18 +9,6 @@ const path = require('path')
 const fileHelper = require('./src/util/fileHelper')
 const wechat_file = path.join(__dirname, './wechat.txt')
 
-var opt = {
-  appId: config.appId,
-  appSecret: config.appSecret,
-  token: config.token,
-  getAccessToken: function() {
-    return fileHelper.readFileAsync(wechat_file, 'utf-8')
-  },
-  saveAccessToken:function(data) {
-    return fileHelper.writeFileAsync(wechat_file, data)
-  }
-}
-
 app
   .use(logger())
   .use(xmlParse())
