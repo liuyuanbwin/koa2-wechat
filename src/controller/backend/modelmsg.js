@@ -1,8 +1,14 @@
 const koa2Req = require('koa2-request')
-const token = require('../../util/wechat')
-
+//const wechat = require('../../util/wechat')
+//import { WeChat } from '../../util/wechat.js'
+const WeChat = require('../../util/wechat')
 
 exports.getBack = async function(ctx, next){
-    var res = await koa2Req('https://api.weixin.qq.com/cgi-bin/template/api_add_template?access_token=' + token().getAccessToken())
-    ctx.body = res
+    // var wechat = await import('../../util/wechat')
+    var wechat = new WeChat()
+     wechat.log()
+    // var res = await koa2Req('https://api.weixin.qq.com/cgi-bin/template/api_add_template?access_token=' + WeChat().getAccessToken())
+    // ctx.body = res
+    console.log('back bakc back ')
+    ctx.body = 'bakc '
 }

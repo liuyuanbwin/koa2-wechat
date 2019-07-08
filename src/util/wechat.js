@@ -1,12 +1,16 @@
 const baseUrl = "http://api.weixin.qq.com/"
+const config = require('../../src/config')
 const WxApi = {
     accessToken: baseUrl+"cgi-bin/token?grant_type=client_credential"
 }
 var koa2Req = require('koa2-request')
-export class WeChat{
+var fileHelper = require('./fileHelper')
+const path = require('path')
+const wechat_file = path.join(__dirname, './wechat.txt')
+class WeChat{
     constructor(){
         var opts = {
-            appId: config.appId,
+            appId: config.appid,
             appSecret: config.appSecret,
             token: config.token,
             getAccessToken: function() {
@@ -20,6 +24,9 @@ export class WeChat{
         this.appSecret = opts.appSecret
         this.getAccessToken = opts.getAccessToken
         this.saveAccessToken = opts.saveAccessToken
+        this.log = function(){
+            console.log('载入模块成功')
+        }
         this.init()
     }
 
@@ -52,8 +59,9 @@ export class WeChat{
             var appSecret = this.appSecret
             var res = await koa2Req(WxApi.accessToken + "&appid=" + appId + "&secret=" + appSecret)
             var data = JSON.parse(res.body)
-            data.expires_in = new Date().getTime() + (date.expires_in - 20) * 1000
+            data.expires_in = new Date().getTime() + (data.expires_in - 20) * 1000
             resolve(data)
         })
     }
 }
+module.exports = WeChat
